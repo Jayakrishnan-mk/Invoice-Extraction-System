@@ -121,6 +121,5 @@ Build order (one module per review checkpoint):
 9. [x] Frontend (Upload / List / Detail pages)
 10. [x] Dockerize frontend, finalize compose
 11. [x] README finalized, all 3 test files passing
-12. [ ] Bonus: AI chat — only if time remains after step 11
 
 Update the checkboxes above as steps complete so future sessions know what's done.
