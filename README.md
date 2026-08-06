@@ -21,6 +21,16 @@ See [CLAUDE.md](./CLAUDE.md) for architecture, folder structure, and conventions
    [CLAUDE.md](./CLAUDE.md#deliberate-simplifications-read-before-improving-these) for
    why this is a scope decision rather than a gap.
 
+## Screenshots
+
+**Invoice list** — filters, search, and pagination over extracted invoices:
+
+![Invoice list page](docs/screenshots/invoice-list.png)
+
+**Swagger docs** — full OpenAPI schema at `/docs`:
+
+![Swagger UI](docs/screenshots/swagger-docs.png)
+
 ## Prerequisites
 
 - Docker + Docker Compose
@@ -105,5 +115,5 @@ none of it touches your real data permanently.
 ## Project status
 
 See the development plan in [CLAUDE.md](./CLAUDE.md#development-plan--status) for what's
-implemented vs. pending. Core flow (upload → extraction → storage → API → frontend) is
-complete and tested; AI chat is an optional bonus not yet built.
+implemented. Core flow (upload → extraction → storage → API → frontend) is
+complete and tested.
