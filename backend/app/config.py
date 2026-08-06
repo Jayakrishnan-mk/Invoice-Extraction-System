@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     CORS_ORIGINS: str = "http://localhost:5173"
     UPLOAD_DIR: str = "uploads"
     MAX_UPLOAD_SIZE_MB: int = 15
+    MOCK_INBOX_DIR: str = "mock_inbox"
 
     @property
     def cors_origins_list(self) -> list[str]:

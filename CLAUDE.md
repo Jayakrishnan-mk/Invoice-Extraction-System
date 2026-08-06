@@ -84,7 +84,7 @@ These are intentional scope decisions for this assessment, not oversights:
 
 Defined in `.env` (copy from `.env.example`): `DATABASE_URL`, `GEMINI_API_KEY`,
 `GEMINI_MODEL`, `APP_ENV`, `LOG_LEVEL`, `CORS_ORIGINS`, `UPLOAD_DIR`,
-`MAX_UPLOAD_SIZE_MB`, `VITE_API_BASE_URL`. Loaded via Pydantic `Settings` in
+`MAX_UPLOAD_SIZE_MB`, `MOCK_INBOX_DIR`, `VITE_API_BASE_URL`. Loaded via Pydantic `Settings` in
 `backend/app/config.py` — never read `os.environ` directly elsewhere.
 
 ## Commands
@@ -115,7 +115,7 @@ Build order (one module per review checkpoint):
 3. [x] DB layer (models, first migration, repository CRUD)
 4. [x] PDF service + unit tests
 5. [x] AI extraction service (Gemini) + unit tests
-6. [ ] Invoice service + upload/ingest endpoints + integration test
+6. [x] Invoice service + upload/ingest endpoints + integration test
 7. [ ] List/detail/filter/search endpoints
 8. [ ] Swagger polish
 9. [ ] Frontend (Upload / List / Detail pages)

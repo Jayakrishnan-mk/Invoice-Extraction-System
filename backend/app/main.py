@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api.v1 import health
+from app.api.v1 import health, invoices
 from app.config import settings
 from app.core.exceptions import AppError
 from app.core.exception_handlers import app_error_handler, unhandled_exception_handler
@@ -25,6 +25,7 @@ def create_app() -> FastAPI:
     app.add_exception_handler(Exception, unhandled_exception_handler)
 
     app.include_router(health.router, prefix="/api/v1")
+    app.include_router(invoices.router, prefix="/api/v1")
 
     return app
 
