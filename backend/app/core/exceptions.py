@@ -12,3 +12,8 @@ class AppError(Exception):
 class NotFoundError(AppError):
     status_code = 404
     detail = "Resource not found"
+
+
+class PDFExtractionError(AppError):
+    status_code = 422
+    detail = "Failed to extract text from PDF"
