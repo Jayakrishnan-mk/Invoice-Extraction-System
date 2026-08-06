@@ -1,17 +1,18 @@
 import logging
 import time
+import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
 from fastapi import UploadFile
 
 from app.config import settings
-from app.core.exceptions import AppError
+from app.core.exceptions import AppError, NotFoundError
 from app.models.invoice import Invoice, PaymentStatus
 from app.models.invoice_item import InvoiceItem
 from app.repositories.invoice_repository import InvoiceRepository
 from app.schemas.extraction import ExtractedInvoiceData
-from app.schemas.invoice import InvoiceUploadResult
+from app.schemas.invoice import InvoiceListItem, InvoiceListParams, InvoiceListResponse, InvoiceUploadResult
 from app.services.ai_extraction_service import AIExtractionService
 from app.services.pdf_service import PDFService
 from app.utils.file_utils import save_pdf, validate_pdf_upload
@@ -47,6 +48,23 @@ class InvoiceService:
         pdf_paths = sorted(inbox.glob("*.pdf")) if inbox.is_dir() else []
 
         return [self._process_file(path.read_bytes(), path.name) for path in pdf_paths]
+
+    def list_invoices(self, params: InvoiceListParams) -> InvoiceListResponse:
+        invoices, total = self._repository.list_filtered(params)
+        items = [InvoiceListItem.model_validate(invoice) for invoice in invoices]
+        return InvoiceListResponse.build(items, total, params.page, params.page_size)
+
+    def get_invoice(self, invoice_id: uuid.UUID) -> Invoice:
+        invoice = self._repository.get_by_id(invoice_id)
+        if invoice is None:
+            raise NotFoundError(f"Invoice {invoice_id} not found")
+        return invoice
+
+    def list_vendors(self) -> list[str]:
+        return self._repository.list_distinct_vendors()
+
+    def list_materials(self) -> list[str]:
+        return self._repository.list_distinct_materials()
 
     def _process_upload(self, file: UploadFile) -> InvoiceUploadResult:
         try:
