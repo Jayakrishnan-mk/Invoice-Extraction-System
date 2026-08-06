@@ -9,6 +9,7 @@ from app.config import settings
 from app.database import get_db
 from app.dependencies import get_ai_extraction_service
 from app.main import app
+from app.models.invoice import Invoice
 
 _engine = create_engine(settings.DATABASE_URL)
 
@@ -19,6 +20,12 @@ def db_session():
 
     Lets InvoiceRepository call db.commit() normally while keeping every test
     isolated - see SQLAlchemy's "Joining a Session into an External Transaction" recipe.
+
+    Tests run against the same Postgres instance used for local dev (no separate
+    test database), so any invoices left over from manual testing/mock-inbox
+    ingestion would collide with count-based assertions. Clearing the tables here
+    happens inside the outer transaction that gets rolled back at the end, so
+    pre-existing rows reappear once the test finishes - nothing is lost.
     """
     connection = _engine.connect()
     outer_transaction = connection.begin()
@@ -31,6 +38,9 @@ def db_session():
         nonlocal nested
         if not nested.is_active:
             nested = connection.begin_nested()
+
+    session.query(Invoice).delete(synchronize_session=False)
+    session.commit()
 
     yield session
 
