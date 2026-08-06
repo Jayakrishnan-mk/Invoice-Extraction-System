@@ -112,7 +112,7 @@ Build order (one module per review checkpoint):
 
 1. [x] Root scaffolding (this file, docker-compose, env files)
 2. [x] Backend skeleton (FastAPI app, config, logging, DB connection, Alembic init, `/health`)
-3. [ ] DB layer (models, first migration, repository CRUD)
+3. [x] DB layer (models, first migration, repository CRUD)
 4. [ ] PDF service + unit tests
 5. [ ] AI extraction service (Gemini) + unit tests
 6. [ ] Invoice service + upload/ingest endpoints + integration test
