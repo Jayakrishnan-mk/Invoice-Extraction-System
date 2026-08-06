@@ -118,7 +118,7 @@ Build order (one module per review checkpoint):
 6. [x] Invoice service + upload/ingest endpoints + integration test
 7. [x] List/detail/filter/search endpoints
 8. [x] Swagger polish
-9. [ ] Frontend (Upload / List / Detail pages)
+9. [x] Frontend (Upload / List / Detail pages)
 10. [ ] Dockerize frontend, finalize compose
 11. [ ] README finalized, all 3 test files passing
 12. [ ] Bonus: AI chat — only if time remains after step 11
