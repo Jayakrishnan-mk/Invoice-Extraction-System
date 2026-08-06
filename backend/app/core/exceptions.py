@@ -17,3 +17,8 @@ class NotFoundError(AppError):
 class PDFExtractionError(AppError):
     status_code = 422
     detail = "Failed to extract text from PDF"
+
+
+class AIExtractionError(AppError):
+    status_code = 502
+    detail = "Failed to extract structured invoice data"

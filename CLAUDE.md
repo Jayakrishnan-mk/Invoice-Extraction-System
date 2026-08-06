@@ -114,7 +114,7 @@ Build order (one module per review checkpoint):
 2. [x] Backend skeleton (FastAPI app, config, logging, DB connection, Alembic init, `/health`)
 3. [x] DB layer (models, first migration, repository CRUD)
 4. [x] PDF service + unit tests
-5. [ ] AI extraction service (Gemini) + unit tests
+5. [x] AI extraction service (Gemini) + unit tests
 6. [ ] Invoice service + upload/ingest endpoints + integration test
 7. [ ] List/detail/filter/search endpoints
 8. [ ] Swagger polish
