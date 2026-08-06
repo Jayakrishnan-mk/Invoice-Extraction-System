@@ -20,7 +20,42 @@ class InvoiceItemRead(BaseModel):
 
 
 class InvoiceRead(BaseModel):
-    model_config = ConfigDict(from_attributes=True)
+    model_config = ConfigDict(
+        from_attributes=True,
+        json_schema_extra={
+            "example": {
+                "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                "vendor_name": "Sunrise Building Materials Pvt Ltd",
+                "vendor_email": "billing@sunrisematerials.example.com",
+                "invoice_number": "SBM-2026-0148",
+                "invoice_date": "2026-07-18",
+                "material_type": "Cement",
+                "subtotal_amount": "125000.00",
+                "tax_amount": "22500.00",
+                "total_amount": "147500.00",
+                "currency": "INR",
+                "status": "completed",
+                "payment_status": "paid",
+                "source_filename": "sunrise_invoice_0148.pdf",
+                "llm_model": "gemini-2.5-flash",
+                "processed_at": "2026-07-18T09:32:11.402Z",
+                "processing_time_ms": 3120,
+                "created_at": "2026-07-18T09:32:11.500Z",
+                "updated_at": "2026-07-18T09:32:11.500Z",
+                "items": [
+                    {
+                        "id": "9c858901-8a57-4791-81fe-4c455b099bc9",
+                        "description": "OPC 53 Grade Cement - 50kg bags",
+                        "material_type": "Cement",
+                        "quantity": "500.00",
+                        "unit": "bag",
+                        "unit_price": "250.00",
+                        "line_total": "125000.00",
+                    }
+                ],
+            }
+        },
+    )
 
     id: uuid.UUID
     vendor_name: str
@@ -51,6 +86,27 @@ class InvoiceUploadResult(BaseModel):
 
 
 class InvoiceUploadResponse(BaseModel):
+    model_config = ConfigDict(
+        json_schema_extra={
+            "example": {
+                "results": [
+                    {
+                        "filename": "sunrise_invoice_0148.pdf",
+                        "status": "completed",
+                        "invoice": InvoiceRead.model_config["json_schema_extra"]["example"],
+                        "error": None,
+                    },
+                    {
+                        "filename": "corrupted_scan.pdf",
+                        "status": "failed",
+                        "invoice": None,
+                        "error": "Failed to extract text from PDF",
+                    },
+                ]
+            }
+        }
+    )
+
     results: list[InvoiceUploadResult]
 
 
@@ -108,6 +164,32 @@ class InvoiceListParams(BaseModel):
 
 
 class InvoiceListResponse(BaseModel):
+    model_config = ConfigDict(
+        json_schema_extra={
+            "example": {
+                "items": [
+                    {
+                        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                        "vendor_name": "Sunrise Building Materials Pvt Ltd",
+                        "invoice_number": "SBM-2026-0148",
+                        "invoice_date": "2026-07-18",
+                        "material_type": "Cement",
+                        "total_amount": "147500.00",
+                        "currency": "INR",
+                        "status": "completed",
+                        "payment_status": "paid",
+                        "source_filename": "sunrise_invoice_0148.pdf",
+                        "created_at": "2026-07-18T09:32:11.500Z",
+                    }
+                ],
+                "total": 1,
+                "page": 1,
+                "page_size": 20,
+                "total_pages": 1,
+            }
+        }
+    )
+
     items: list[InvoiceListItem]
     total: int
     page: int

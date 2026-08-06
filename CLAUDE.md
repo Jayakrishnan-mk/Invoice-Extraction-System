@@ -117,7 +117,7 @@ Build order (one module per review checkpoint):
 5. [x] AI extraction service (Gemini) + unit tests
 6. [x] Invoice service + upload/ingest endpoints + integration test
 7. [x] List/detail/filter/search endpoints
-8. [ ] Swagger polish
+8. [x] Swagger polish
 9. [ ] Frontend (Upload / List / Detail pages)
 10. [ ] Dockerize frontend, finalize compose
 11. [ ] README finalized, all 3 test files passing
