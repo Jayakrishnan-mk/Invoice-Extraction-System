@@ -6,6 +6,15 @@ PostgreSQL behind a FastAPI REST API with a React frontend.
 
 See [CLAUDE.md](./CLAUDE.md) for architecture, folder structure, and conventions.
 
+## Live demo
+
+- **Frontend**: https://invoice-extraction-system.vercel.app/
+- **Backend (Swagger docs)**: https://invoice-extraction-system.onrender.com/docs
+
+The backend is hosted on Render's free tier, which spins down after periods of
+inactivity — the first request after a while may take 30-50 seconds to respond while it
+wakes up.
+
 ## How it works
 
 1. A PDF is uploaded (or picked up from the mock inbox, simulating an incoming vendor
